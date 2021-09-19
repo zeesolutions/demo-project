@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+name: M-API
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      name:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Mapi Validate'
+        # Default value if no value is explicitly provided
+        default: 'World'
+        # Input has to be provided for the workflow to run
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run Mayhem for API to check for vulnerabilities
+      uses: ForAllSecure/mapi-action@v1
+      with:
+        mapi-token: ${{ secrets.MAPI_TOKEN }}
+        api-url: ${{ secrets.REVIEW_ENV }} # <- update this
+        api-spec: ${{ secrets.REVIEW_ENV }}v3/api-docs # <- update this
