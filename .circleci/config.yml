@@ -14,7 +14,23 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-      - slack/notify
+      - slack/notify:
+          custom: |
+                {
+                  "blocks": [
+                    {
+                      "type": "section",
+                      "fields": [
+                        {
+                          "type": "plain_text",
+                          "text": "*This is a text notification*",
+                          "emoji": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+          event: always
       - jira/notify
       - codecov/upload
       # Use mvn clean and package as the standard maven build phase
