@@ -23,6 +23,9 @@ jobs:
       - run:
           name: Test
           command: mvn test
+      - run:
+          name: Analyze on SonarCloud
+          command: mvn verify sonar:sonar -Dsonar.projectKey=zeesolutions_demo-project
       - slack/notify:
           branch_pattern: .+ 
           channel: C02DKBSH3H9
